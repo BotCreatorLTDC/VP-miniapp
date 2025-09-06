@@ -55,7 +55,7 @@ async function loadPlugsData() {
         console.log('Loading plugs data from bot API...');
         
         // Get bot URL from environment or use default
-        const botUrl = 'https://verifyplug-bot.onrender.com'; // Updated Render URL
+        const botUrl = 'https://vp-bot-txud.onrender.com'; // Correct Render URL
         
         console.log('Fetching from URL:', `${botUrl}/api/plugs`);
         
