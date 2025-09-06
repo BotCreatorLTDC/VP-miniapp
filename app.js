@@ -46,181 +46,63 @@ function sendDataToBot(action, data) {
     tg.sendData(JSON.stringify(payload));
 }
 
-// Sample plugs data
-const plugsData = [
-    {
-        id: 1,
-        name: "AmsterdamGreen",
-        country: "🇳🇱",
-        countryName: "Netherlands",
-        avatar: "AG",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 127,
-        liked: false,
-        description: "Premium Dutch quality, fast shipping to all Europe",
-        verified: true,
-        reports: 0,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 2,
-        name: "BerlinBud",
-        country: "🇩🇪",
-        countryName: "Germany",
-        avatar: "BB",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" }
-        ],
-        votes: 89,
-        liked: false,
-        description: "High quality German products, meetup only in Berlin",
-        verified: true,
-        reports: 1,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 3,
-        name: "ParisPurple",
-        country: "🇫🇷",
-        countryName: "France",
-        avatar: "PP",
-        methods: [
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 156,
-        liked: true,
-        description: "French Purple Haze, discrete and secure shipping",
-        verified: true,
-        reports: 0,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 4,
-        name: "MadridMint",
-        country: "🇪🇸",
-        countryName: "Spain",
-        avatar: "MM",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 203,
-        liked: false,
-        description: "Premium Spanish mint, available throughout the peninsula",
-        verified: true,
-        reports: 2,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 5,
-        name: "RomeRed",
-        country: "🇮🇹",
-        countryName: "Italy",
-        avatar: "RR",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 78,
-        liked: false,
-        description: "Italian Red Devil, meetup only in Rome and Milan",
-        verified: false,
-        reports: 3,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 6,
-        name: "LondonLemon",
-        country: "🇬🇧",
-        countryName: "United Kingdom",
-        avatar: "LL",
-        methods: [
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 134,
-        liked: true,
-        description: "British Lemon Haze, fast shipping to all Europe",
-        verified: true,
-        reports: 1,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 7,
-        name: "ViennaViolet",
-        country: "🇦🇹",
-        countryName: "Austria",
-        avatar: "VV",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" }
-        ],
-        votes: 92,
-        liked: false,
-        description: "Austrian violet, premium alpine quality",
-        verified: true,
-        reports: 0,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 8,
-        name: "PraguePurple",
-        country: "🇨🇿",
-        countryName: "Czech Republic",
-        avatar: "PP",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 67,
-        liked: false,
-        description: "Czech Purple Punch, meetup only in Prague",
-        verified: false,
-        reports: 4,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 9,
-        name: "StockholmSilver",
-        country: "🇸🇪",
-        countryName: "Sweden",
-        avatar: "SS",
-        methods: [
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
-            { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
-        ],
-        votes: 145,
-        liked: true,
-        description: "Swedish Silver Haze, discrete shipping to all Scandinavia",
-        verified: true,
-        reports: 1,
-        telegram: "@grlltdc"
-    },
-    {
-        id: 10,
-        name: "CopenhagenCrystal",
-        country: "🇩🇰",
-        countryName: "Denmark",
-        avatar: "CC",
-        methods: [
-            { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
-            { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" }
-        ],
-        votes: 111,
-        liked: false,
-        description: "Danish Crystal Clear, exceptional Nordic quality",
-        verified: true,
-        reports: 0,
-        telegram: "@grlltdc"
+// Plugs data - will be loaded from bot API
+let plugsData = [];
+
+// Load plugs data from bot API
+async function loadPlugsData() {
+    try {
+        console.log('Loading plugs data from bot API...');
+        
+        // Get bot URL from environment or use default
+        const botUrl = 'https://vp-bot.onrender.com'; // Update this with your actual Render URL
+        
+        const response = await fetch(`${botUrl}/api/plugs`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        plugsData = data;
+        
+        console.log('Plugs data loaded successfully:', plugsData.length, 'plugs');
+        
+        // Reload UI with new data
+        if (document.getElementById('plugs-list')) {
+            loadPlugsList();
+        }
+        if (document.getElementById('research-plugs-list')) {
+            filterPlugs();
+        }
+        
+    } catch (error) {
+        console.error('Error loading plugs data:', error);
+        
+        // Fallback to static data if API fails
+        plugsData = [
+            {
+                id: 1,
+                name: "AmsterdamGreen",
+                country: "🇳🇱",
+                countryName: "Netherlands",
+                avatar: "AG",
+                methods: [
+                    { type: "meetup", icon: "fas fa-handshake", label: "Meetup" },
+                    { type: "shipping", icon: "fas fa-shipping-fast", label: "Shipping" },
+                    { type: "crypto", icon: "fab fa-bitcoin", label: "Crypto" }
+                ],
+                votes: 127,
+                liked: false,
+                description: "Premium Dutch quality, fast shipping to all Europe",
+                verified: true,
+                reports: 0,
+                telegram: "@grlltdc"
+            }
+        ];
+        
+        console.log('Using fallback data');
     }
-];
+}
 
 // Show specific section
 function showSection(sectionId) {
@@ -259,10 +141,21 @@ function loadPlugsList() {
     
     plugsList.innerHTML = '';
     
+    if (plugsData.length === 0) {
+        plugsList.innerHTML = '<div class="no-results">Loading plugs data...</div>';
+        return;
+    }
+    
     plugsData.forEach(plug => {
         const plugElement = createPlugElement(plug);
         plugsList.appendChild(plugElement);
     });
+}
+
+// Refresh plugs data from bot
+async function refreshPlugsData() {
+    console.log('Refreshing plugs data...');
+    await loadPlugsData();
 }
 
 // Create plug element
@@ -514,7 +407,7 @@ function clearFilters() {
 }
 
 // Initialize application
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('VerifyPlug Mini-App started');
     
     // Configure Telegram buttons
@@ -522,6 +415,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show user information
     showUserInfo();
+    
+    // Load plugs data from bot API
+    await loadPlugsData();
     
     // Load initial content
     loadPlugsList();
