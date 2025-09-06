@@ -55,9 +55,14 @@ async function loadPlugsData() {
         console.log('Loading plugs data from bot API...');
         
         // Get bot URL from environment or use default
-        const botUrl = 'https://vp-bot.onrender.com'; // Update this with your actual Render URL
+        const botUrl = 'https://verifyplug-bot.onrender.com'; // Updated Render URL
+        
+        console.log('Fetching from URL:', `${botUrl}/api/plugs`);
         
         const response = await fetch(`${botUrl}/api/plugs`);
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -66,6 +71,7 @@ async function loadPlugsData() {
         plugsData = data;
         
         console.log('Plugs data loaded successfully:', plugsData.length, 'plugs');
+        console.log('Sample plug data:', plugsData[0]);
         
         // Reload UI with new data
         if (document.getElementById('plugs-list')) {
@@ -118,9 +124,15 @@ function showSection(sectionId) {
         
         // Load specific content
         if (sectionId === 'verifyplug-app') {
-            loadPlugsList();
+            // Reload data from bot before showing list
+            loadPlugsData().then(() => {
+                loadPlugsList();
+            });
         } else if (sectionId === 'verifyplug-list') {
-            loadTextList();
+            // Reload data from bot before showing text list
+            loadPlugsData().then(() => {
+                loadTextList();
+            });
         } else if (sectionId === 'researcher') {
             loadResearchSection();
         }
@@ -156,6 +168,12 @@ function loadPlugsList() {
 async function refreshPlugsData() {
     console.log('Refreshing plugs data...');
     await loadPlugsData();
+}
+
+// Force reload data when section changes
+function forceReloadData() {
+    console.log('Force reloading data...');
+    loadPlugsData();
 }
 
 // Create plug element
