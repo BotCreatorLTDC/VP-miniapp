@@ -1,74 +1,121 @@
-# VerifyPlug EU - Mini App
+# VerifyPlug Mini-App para Telegram
 
-Una Mini App de Telegram para verificar plugs legítimos en Europa.
+Una Mini App de Telegram para la verificación y gestión de plugs confiables, integrada directamente con el bot de Telegram.
 
 ## 🚀 Características
 
-- **Lista Visual de Plugs**: Muestra plugs verificados con información detallada
-- **Lista de Texto**: Versión en texto plano para fácil lectura
-- **Sistema de Votación**: Los usuarios pueden votar por plugs
-- **Reportes**: Sistema de reportes para plugs problemáticos
-- **Verificación**: Plugs verificados por la comunidad
-
-## 📱 Funcionalidades
-
-### Menú Principal
-- 🔍 **VerifyPlug Mini-App**: Lista visual interactiva
-- 📄 **VerifyPlug List**: Lista en texto plano
-- 💾 **BackUp**: Funcionalidad de respaldo
-- 📸 **Instagram**: Integración con Instagram
-- 🤝 **Escrow**: Sistema de garantía
-- ❓ **F.A.Q.**: Preguntas frecuentes
+### Opciones Principales
+1. **VerifyPlug Mini-App** - Lista visual de plugs con información detallada
+2. **VerifyPlug List** - Lista en formato texto plano
+3. **BackUp** - Sistema de respaldo (en desarrollo)
+4. **Instagram** - Integración con Instagram (en desarrollo)
+5. **Escrow** - Sistema de garantía (en desarrollo)
+6. **F.A.Q.** - Preguntas frecuentes (en desarrollo)
 
 ### Navegación Inferior
-- 🏠 **Home**: Lista principal de plugs
-- 🔍 **Researcher**: Búsqueda por país o método
-- 🎁 **Giveaway**: Sistema de sorteos
+- **Home** - Menú principal
+- **Researcher** - Búsqueda por país o método de entrega
+- **Giveaway** - Sistema de sorteos (en desarrollo)
+
+## 📱 Formato de Plug
+
+Cada plug muestra:
+```
+----------------------------------------------------------------------------------------------------------
+Imagen          Icono de País |  Nombre
+    de                Iconos de mettup/shipping   | Votaciones(num de likes)                  
+  Perfil 
+-----------------------------------------------------------------------------------------------------------
+```
+
+### Información incluida:
+- **Avatar** - Iniciales del plug
+- **País** - Bandera y nombre del país
+- **Métodos** - Meetup, Shipping, Crypto
+- **Votaciones** - Sistema de likes/dislikes
+- **Descripción** - Información adicional
 
 ## 🛠️ Tecnologías
 
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Telegram API**: Telegram Web Apps
-- **Hosting**: GitHub Pages
+- **HTML5** - Estructura semántica
+- **CSS3** - Diseño responsive y animaciones
+- **JavaScript ES6+** - Funcionalidad interactiva
+- **Telegram Web Apps API** - Integración con Telegram
+- **Font Awesome** - Iconografía
+- **Gradientes CSS** - Diseño moderno
 
-## 📋 Instalación
-
-1. Clona el repositorio:
-```bash
-git clone https://github.com/tu-usuario/verifyplug-miniapp.git
-```
-
-2. Abre `index.html` en tu navegador o sube a un servidor web.
-
-## 🔧 Configuración
-
-Para usar con un bot de Telegram:
-
-1. Configura la URL de la Mini App en tu bot
-2. Asegúrate de que la URL sea HTTPS (requerido por Telegram)
-3. Configura los handlers en tu bot para recibir datos de la Mini App
-
-## 📝 Estructura del Proyecto
+## 📁 Estructura de Archivos
 
 ```
-verifyplug-miniapp/
-├── index.html          # Página principal
-├── styles.css          # Estilos CSS
-├── app.js             # Lógica JavaScript
-├── README.md          # Documentación
-└── .gitignore         # Archivos ignorados por Git
+verifyplug_miniapp/
+├── index.html              # Página principal
+├── styles.css              # Estilos CSS
+├── app.js                 # Lógica JavaScript con Telegram Web Apps API
+├── telegram-config.json   # Configuración de Telegram
+└── README.md              # Documentación
 ```
 
-## 🌐 GitHub Pages
+## 🎨 Características de Diseño
 
-Esta Mini App está configurada para funcionar con GitHub Pages.
+- **Responsive** - Adaptable a móviles y tablets
+- **Gradientes** - Colores modernos y atractivos
+- **Animaciones** - Transiciones suaves
+- **Scroll personalizado** - Barras de desplazamiento estilizadas
+- **Notificaciones** - Feedback visual para acciones
 
-**URL de la Mini App**: `https://tu-usuario.github.io/verifyplug-miniapp/`
+## 🔧 Funcionalidades Implementadas
+
+### ✅ Completadas
+- [x] Menú principal con 6 opciones
+- [x] Lista visual de plugs con formato especificado
+- [x] Lista de texto plano
+- [x] Sistema de votaciones (like/dislike)
+- [x] Navegación inferior (Home, Researcher, Giveaway)
+- [x] Diseño responsive
+- [x] Animaciones y transiciones
+- [x] Sistema de notificaciones
+- [x] Integración con Telegram Web Apps API
+- [x] Comunicación bidireccional con el bot
+- [x] Botones nativos de Telegram
+- [x] Envío de datos al bot
+
+### 🚧 En Desarrollo
+- [ ] Funcionalidad de búsqueda (Researcher)
+- [ ] Sistema de Giveaway
+- [ ] Integración con Instagram
+- [ ] Sistema de Escrow
+- [ ] BackUp de datos
+- [ ] F.A.Q. completo
+
+## 📱 Uso
+
+### Desde Telegram:
+1. Abre el bot de Telegram
+2. Usa el comando `/start` para ver el menú principal
+3. Toca el botón "🔍 VerifyPlug Mini-App"
+4. La Mini App se abrirá dentro de Telegram
+5. Navega por las opciones y vota por los plugs
+
+### Desarrollo local:
+1. Abre `index.html` en un navegador web
+2. Selecciona "VerifyPlug Mini-App" para ver la lista visual
+3. Selecciona "VerifyPlug List" para ver la lista de texto
+4. Usa los botones de navegación inferior para acceder a otras funciones
+5. Vota por los plugs usando los botones de like/dislike
+
+## 🔮 Próximas Funcionalidades
+
+- Búsqueda avanzada por filtros
+- Sistema de reportes
+- Integración con APIs externas
+- Base de datos persistente
+- Sistema de autenticación
+- Panel de administración
 
 ## 📞 Soporte
 
-Para soporte o preguntas, contacta a través de Telegram.
+Para reportar bugs o solicitar funcionalidades, contacta al desarrollador.
 
-## 📄 Licencia
+---
 
-Este proyecto está bajo la Licencia MIT.
+**Desarrollado con ❤️ para la comunidad VerifyPlug**

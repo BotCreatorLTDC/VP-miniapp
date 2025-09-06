@@ -1,0 +1,6 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="35" fill="#667eea" stroke="#5a6fd8" stroke-width="3"/>
+  <text x="40" y="30" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">VP</text>
+  <text x="40" y="45" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">EU</text>
+  <circle cx="40" cy="55" r="3" fill="white"/>
+</svg>
