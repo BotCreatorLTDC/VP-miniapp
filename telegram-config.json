@@ -1,0 +1,27 @@
+{
+  "name": "VerifyPlug Mini-App",
+  "description": "Sistema de verificación de plugs confiables",
+  "version": "1.0.0",
+  "url": "https://mpg-miniapp-1.onrender.com/verifyplug_miniapp/",
+  "features": [
+    "Lista visual de plugs",
+    "Sistema de votaciones",
+    "Búsqueda por país y método",
+    "Reportes de plugs",
+    "Integración con Telegram"
+  ],
+  "permissions": [
+    "web_app_data",
+    "user_data"
+  ],
+  "bot_integration": {
+    "send_data": true,
+    "receive_votes": true,
+    "receive_reports": true
+  },
+  "deployment": {
+    "platform": "render",
+    "domain": "mpg-miniapp-1.onrender.com",
+    "path": "/verifyplug_miniapp/"
+  }
+}

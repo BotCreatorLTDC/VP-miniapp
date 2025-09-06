@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Plug EU - Legit Plug List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1><i class="fas fa-shield-alt"></i> Verify Plug EU</h1>
+            <p>Legit Plug List by VerifyPlugEU</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Menu Principal -->
+            <div id="main-menu" class="menu-section active">
+                <h2>Selecciona una opción:</h2>
+                <div class="menu-grid">
+                    <button class="menu-option" onclick="showSection('verifyplug-app')">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>VerifyPlug Mini-App</span>
+                    </button>
+                    <button class="menu-option" onclick="showSection('verifyplug-list')">
+                        <i class="fas fa-list"></i>
+                        <span>VerifyPlug List</span>
+                    </button>
+                    <button class="menu-option" onclick="showSection('backup')">
+                        <i class="fas fa-database"></i>
+                        <span>BackUp</span>
+                    </button>
+                    <button class="menu-option" onclick="showSection('instagram')">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </button>
+                    <button class="menu-option" onclick="showSection('escrow')">
+                        <i class="fas fa-handshake"></i>
+                        <span>Escrow</span>
+                    </button>
+                    <button class="menu-option" onclick="showSection('faq')">
+                        <i class="fas fa-question-circle"></i>
+                        <span>F.A.Q.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VerifyPlug Mini-App -->
+            <div id="verifyplug-app" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fas fa-mobile-alt"></i> VerifyPlug Mini-App</h2>
+                </div>
+                
+                <!-- Lista de Plugs -->
+                <div class="plugs-container">
+                    <div id="plugs-list" class="plugs-list">
+                        <!-- Los plugs se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- VerifyPlug List (Texto Plano) -->
+            <div id="verifyplug-list" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fas fa-list"></i> VerifyPlug List</h2>
+                </div>
+                
+                <div class="text-list-container">
+                    <div id="text-list" class="text-list">
+                        <!-- La lista de texto se cargará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Otras secciones placeholder -->
+            <div id="backup" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fas fa-database"></i> BackUp</h2>
+                </div>
+                <p>Funcionalidad de BackUp en desarrollo...</p>
+            </div>
+
+            <div id="instagram" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fab fa-instagram"></i> Instagram</h2>
+                </div>
+                <p>Integración con Instagram en desarrollo...</p>
+            </div>
+
+            <div id="escrow" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fas fa-handshake"></i> Escrow</h2>
+                </div>
+                <p>Sistema de Escrow en desarrollo...</p>
+            </div>
+
+            <div id="faq" class="content-section">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('main-menu')">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <h2><i class="fas fa-question-circle"></i> F.A.Q.</h2>
+                </div>
+                <p>Preguntas Frecuentes en desarrollo...</p>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="showBottomNav('home')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-btn" onclick="showBottomNav('researcher')">
+                <i class="fas fa-search"></i>
+                <span>Researcher</span>
+            </button>
+            <button class="nav-btn" onclick="showBottomNav('giveaway')">
+                <i class="fas fa-gift"></i>
+                <span>Giveaway</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
