@@ -7,34 +7,34 @@ tg.expand();
 tg.setHeaderColor('#667eea');
 tg.setBackgroundColor('#f8f9fa');
 
-// Configurar botones de Telegram
+// Configure Telegram buttons
 function setupTelegramButtons() {
-    // Botón principal para cerrar
-    tg.MainButton.setText('Cerrar');
+    // Main button to close
+    tg.MainButton.setText('Close');
     tg.MainButton.show();
     tg.MainButton.onClick(() => {
         tg.close();
     });
 
-    // Botón de retroceso
+    // Back button
     tg.BackButton.show();
     tg.BackButton.onClick(() => {
         showSection('main-menu');
     });
 }
 
-// Mostrar información del usuario de Telegram
+// Show Telegram user information
 function showUserInfo() {
     const user = tg.initDataUnsafe?.user;
     if (user) {
-        console.log('Usuario de Telegram:', user);
+        console.log('Telegram user:', user);
         console.log('ID:', user.id);
-        console.log('Nombre:', user.first_name, user.last_name);
+        console.log('Name:', user.first_name, user.last_name);
         console.log('Username:', user.username);
     }
 }
 
-// Enviar datos al bot de Telegram
+// Send data to Telegram bot
 function sendDataToBot(action, data) {
     const payload = {
         action: action,
@@ -42,11 +42,11 @@ function sendDataToBot(action, data) {
         timestamp: new Date().toISOString()
     };
     
-    console.log('Enviando datos al bot:', payload);
+    console.log('Sending data to bot:', payload);
     tg.sendData(JSON.stringify(payload));
 }
 
-// Datos de ejemplo de plugs
+// Sample plugs data
 const plugsData = [
     {
         id: 1,
@@ -222,19 +222,19 @@ const plugsData = [
     }
 ];
 
-// Mostrar sección específica
+// Show specific section
 function showSection(sectionId) {
-    // Ocultar todas las secciones
+    // Hide all sections
     document.querySelectorAll('.menu-section, .content-section').forEach(section => {
         section.classList.remove('active');
     });
     
-    // Mostrar la sección seleccionada
+    // Show selected section
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add('active');
         
-        // Cargar contenido específico
+        // Load specific content
         if (sectionId === 'verifyplug-app') {
             loadPlugsList();
         } else if (sectionId === 'verifyplug-list') {
@@ -244,15 +244,15 @@ function showSection(sectionId) {
         }
     }
 
-    // Configurar botones de Telegram según la sección
-        if (sectionId === 'main-menu') {
-            tg.BackButton.hide();
-        } else {
-            tg.BackButton.show();
-        }
+    // Configure Telegram buttons according to section
+    if (sectionId === 'main-menu') {
+        tg.BackButton.hide();
+    } else {
+        tg.BackButton.show();
     }
+}
 
-// Cargar lista visual de plugs
+// Load visual plugs list
 function loadPlugsList() {
     const plugsList = document.getElementById('plugs-list');
     if (!plugsList) return;
@@ -265,7 +265,7 @@ function loadPlugsList() {
     });
 }
 
-// Crear elemento de plug
+// Create plug element
 function createPlugElement(plug) {
     const plugDiv = document.createElement('div');
     plugDiv.className = `plug-item ${plug.verified ? 'verified' : ''}`;
@@ -299,7 +299,7 @@ function createPlugElement(plug) {
         </div>
     `;
 
-    // Agregar evento de click para redirigir al chat
+    // Add click event to redirect to chat
     plugDiv.addEventListener('click', (e) => {
         if (!e.target.closest('.votes')) {
             handlePlugClick(plug);
@@ -309,27 +309,27 @@ function createPlugElement(plug) {
     return plugDiv;
 }
 
-// Manejar click en plug
+// Handle plug click
 function handlePlugClick(plug) {
     console.log('Plug selected:', plug);
     
-    // Enviar datos al bot
+    // Send data to bot
     sendDataToBot('plug_selected', {
         plug_id: plug.id,
         plug_name: plug.name,
         action: 'view_details'
     });
 
-    // Mostrar información del plug y redirigir al chat
+    // Show plug information and redirect to chat
     const message = `Plug: ${plug.name}\nCountry: ${plug.countryName}\nVotes: ${plug.votes}\nVerified: ${plug.verified ? 'Yes' : 'No'}\n\nRedirecting to ${plug.telegram}...`;
     
     if (confirm(message)) {
-        // Abrir el chat de Telegram
+        // Open Telegram chat
         window.open(`https://t.me/${plug.telegram.replace('@', '')}`, '_blank');
     }
 }
 
-// Manejar like/unlike
+// Handle like/unlike
 function handleLike(event, plugId) {
     event.stopPropagation();
     
@@ -340,7 +340,7 @@ function handleLike(event, plugId) {
     plug.liked = !plug.liked;
     plug.votes += plug.liked ? 1 : -1;
     
-    // Enviar datos al bot
+    // Send data to bot
     sendDataToBot('plug_liked', {
         plug_id: plug.id,
         plug_name: plug.name,
@@ -348,7 +348,7 @@ function handleLike(event, plugId) {
         new_votes: plug.votes
     });
     
-    // Actualizar la UI
+    // Update UI
     const votesElement = event.target.closest('.votes');
     const icon = votesElement.querySelector('i');
     const count = votesElement.querySelector('span');
@@ -366,40 +366,40 @@ function handleLike(event, plugId) {
     console.log(`Plug ${plug.name} ${plug.liked ? 'liked' : 'unliked'}. New votes: ${plug.votes}`);
 }
 
-// Cargar lista de texto
+// Load text list
 function loadTextList() {
     const textList = document.getElementById('text-list');
     if (!textList) return;
     
-    let html = '<h3>Lista de Plugs Verificados</h3>\n\n';
+    let html = '<h3>Verified Plugs List</h3>\n\n';
     
     plugsData.forEach(plug => {
         const methods = plug.methods.map(m => m.label).join(', ');
         const verified = plug.verified ? '✓' : '✗';
-        const reports = plug.reports > 0 ? ` (${plug.reports} reportes)` : '';
+        const reports = plug.reports > 0 ? ` (${plug.reports} reports)` : '';
         
         html += `<div class="plug-text">
 ${verified} ${plug.name} ${plug.country} - ${plug.countryName}
-   Métodos: ${methods}
-   Votos: ${plug.votes}${reports}
-   Descripción: ${plug.description}
+   Methods: ${methods}
+   Votes: ${plug.votes}${reports}
+   Description: ${plug.description}
 </div>\n`;
     });
 
     textList.innerHTML = html;
 }
 
-// Mostrar navegación inferior
+// Show bottom navigation
 function showBottomNav(navItem) {
-    // Remover clase active de todos los botones
+    // Remove active class from all buttons
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('active');
     });
 
-    // Agregar clase active al botón seleccionado
+    // Add active class to selected button
     event.target.closest('.nav-btn').classList.add('active');
 
-    // Mostrar contenido según la navegación
+    // Show content according to navigation
     switch(navItem) {
         case 'home':
             showSection('verifyplug-app');
@@ -413,7 +413,7 @@ function showBottomNav(navItem) {
     }
 }
 
-// Cargar sección de Research
+// Load Research section
 function loadResearchSection() {
     const researcherSection = document.getElementById('researcher');
     if (!researcherSection) return;
@@ -460,36 +460,36 @@ function loadResearchSection() {
             
             <div class="research-results">
                 <div id="research-plugs-list" class="plugs-list">
-                    <!-- Los plugs filtrados se cargarán aquí -->
+                    <!-- Filtered plugs will be loaded here -->
                 </div>
             </div>
         </div>
     `;
     
-    // Cargar todos los plugs inicialmente
+    // Load all plugs initially
     filterPlugs();
 }
 
-// Filtrar plugs
+// Filter plugs
 function filterPlugs() {
     const deliveryFilter = document.getElementById('delivery-filter')?.value;
     const countryFilter = document.getElementById('country-filter')?.value;
     
     let filteredPlugs = [...plugsData];
     
-    // Filtrar por método de entrega
+    // Filter by delivery method
     if (deliveryFilter) {
         filteredPlugs = filteredPlugs.filter(plug => 
             plug.methods.some(method => method.type === deliveryFilter)
         );
     }
     
-    // Filtrar por país
+    // Filter by country
     if (countryFilter) {
         filteredPlugs = filteredPlugs.filter(plug => plug.country === countryFilter);
     }
     
-    // Mostrar resultados
+    // Show results
     const researchList = document.getElementById('research-plugs-list');
     if (!researchList) return;
     
@@ -506,40 +506,40 @@ function filterPlugs() {
     });
 }
 
-// Limpiar filtros
+// Clear filters
 function clearFilters() {
     document.getElementById('delivery-filter').value = '';
     document.getElementById('country-filter').value = '';
     filterPlugs();
 }
 
-// Inicializar la aplicación
+// Initialize application
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('VerifyPlug Mini-App iniciada');
+    console.log('VerifyPlug Mini-App started');
     
-    // Configurar botones de Telegram
+    // Configure Telegram buttons
     setupTelegramButtons();
     
-    // Mostrar información del usuario
+    // Show user information
     showUserInfo();
     
-    // Cargar contenido inicial
+    // Load initial content
     loadPlugsList();
     
-    console.log('Mini-App lista para usar');
+    console.log('Mini-App ready to use');
 });
 
-// Manejar eventos de Telegram
+// Handle Telegram events
 tg.onEvent('mainButtonClicked', () => {
-    console.log('Botón principal clickeado');
+    console.log('Main button clicked');
     tg.close();
 });
 
 tg.onEvent('backButtonClicked', () => {
-    console.log('Botón de retroceso clickeado');
-        showSection('main-menu');
+    console.log('Back button clicked');
+    showSection('main-menu');
 });
 
-// Exportar funciones para uso global
+// Export functions for global use
 window.showSection = showSection;
 window.showBottomNav = showBottomNav;
